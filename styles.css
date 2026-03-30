@@ -1,0 +1,631 @@
+:root {
+  --primary: #ff0000;
+  --bg: #ffffff;
+  --text: #2d2d2d;
+  --surface: #fdfbf8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+h1, .logo { font-family: 'Playfair Display', serif; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* Navbar */
+.navbar { background: white; padding: 15px 0; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; z-index: 1000; }
+.nav-inner { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.2rem; text-decoration: none; color: #1a1a1a; font-weight: bold; }
+.logo span { color: var(--primary); }
+.nav-menu a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 500; font-size: 0.9rem; }
+
+/* Hero */
+/* Update Variabel untuk mendukung Full Screen */
+:root {
+  --hero-height: 100vh;
+}
+
+.hero {
+    height: var(--hero-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
+    padding: 0; /* Menghapus padding lama */
+}
+
+/* Logo Latar Belakang (Watermark) */
+.hero-bg-logo {
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    background-image: url('images/about.svg'); /* Gunakan file logo Anda */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.20; /* Sangat samar agar elegan */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.hero-subtitle {
+    display: block;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem); /* Ukuran teks adaptif */
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+/* Tombol Tambahan */
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.btn-outline {
+    display: inline-block;
+    border: 1px solid var(--accent);
+    color: var(--text);
+    padding: .6rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* Animasi Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.7;
+    z-index: 2;
+}
+
+
+
+
+.mouse::before {
+    content: "";
+    width: 4px;
+    height: 8px;
+    background: var(--accent);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 8px;
+    border-radius: 2px;
+    animation: scroll-anim 2s infinite;
+}
+
+@keyframes scroll-anim {
+    0% { top: 8px; opacity: 1; }
+    100% { top: 25px; opacity: 0; }
+}
+
+/* Overlay agar logo terlihat samar dan teks tetap terbaca */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg); /* Mengikuti warna tema (putih/hitam) */
+    opacity: 0.85; /* Semakin besar angka ini, logo semakin samar */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Memastikan teks berada di atas overlay dan logo */
+}
+
+/* Dark Mode Adjustment */
+body.dark-mode .hero::before {
+    background: var(--bg);
+    opacity: 0.9; /* Di dark mode biasanya butuh lebih samar agar elegan */
+}
+
+/* Tombol */
+.btn-primary { 
+  background: var(--primary); color: white; padding: 14px 35px; 
+  border-radius: 50px; text-decoration: none; display: inline-block; font-weight: bold;
+  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+}
+
+/* Portfolio Grid */
+.section { padding: 60px 0; }
+.section-title { text-align: center; margin-bottom: 40px; font-size: 2rem; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+.gallery-item { border-radius: 15px; overflow: hidden; background: white; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+.gallery-item img { width: 100%; height: 250px; object-fit: cover; display: block; }
+.gallery-item figcaption { padding: 20px; text-align: center; font-weight: bold; }
+
+/* WhatsApp */
+.wa-float {
+  position: fixed; bottom: 30px; right: 30px; background: #25d366;
+  width: 60px; height: 60px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 2000;
+}
+.wa-float img { width: 35px; }
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .nav-menu { display: none; } /* Sederhanakan untuk mobile */
+  .hero h1 { font-size: 1.8rem; }
+  .gallery { grid-template-columns: 1fr; }
+}
+/* Container Gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Card Proyek */
+.gallery-item {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px);
+}
+
+/* Pengaturan Gambar */
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover; /* Ini penting agar gambar tidak gepeng */
+    display: block;
+}
+
+/* Teks di bawah gambar */
+.gallery-item figcaption {
+    padding: 15px;
+    text-align: left;
+}
+
+.gallery-item figcaption h3 {
+    font-size: 1.1rem;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+}
+
+.gallery-item figcaption p {
+    font-size: 0.9rem;
+    color: #666;
+}
+/* --- ABOUT SECTION --- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 50px;
+    align-items: center;
+}
+.about-img img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 20px 20px 0px var(--primary); /* Aksen kotak di belakang foto */
+}
+.about-text h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+}
+.about-text p {
+    margin-bottom: 1rem;
+    color: #555;
+}
+.about-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 2rem;
+}
+.stat-item {
+    font-size: 0.9rem;
+    color: #777;
+}
+.stat-item strong {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+/* --- CONTACT SECTION --- */
+.contact-box {
+    background: white;
+    padding: 60px 40px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.05);
+    max-width: 800px;
+    margin: 0 auto;
+}
+.contact-details {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 30px 0;
+    text-align: left;
+}
+.btn-whatsapp-large {
+    background: #25d366;
+    color: white;
+    text-decoration: none;
+    padding: 18px 40px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+}
+.btn-whatsapp-large:hover {
+    transform: scale(1.05);
+    background: #20bd5a;
+}
+.email-text {
+    margin-top: 20px;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Responsif HP */
+@media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 30px; }
+    .about-img { order: 2; }
+    .about-text { order: 1; text-align: center; }
+    .about-stats { justify-content: center; }
+    .contact-details { flex-direction: column; gap: 20px; text-align: center; }
+}
+/* Animasi Melayang untuk Logo Background */
+@keyframes floating {
+    0% { transform: translate(0, 0px); }
+    50% { transform: translate(0, 15px); }
+    100% { transform: translate(0, -0px); }
+}
+
+.hero-bg-logo {
+    position: absolute;
+    width: 80%; /* Sedikit diperkecil agar lebih elegan */
+    height: 50%;
+    background-image: url('images/logo.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.50;
+    z-index: 1;
+    /* Gabungan animasi melayang dan transisi parallax */
+    animation: floating 6s ease-in-out infinite;
+    will-change: transform; /* Optimasi performa */
+}
+
+/* Memastikan konten utama tetap di depan */
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+.social-link {
+    color: var(--text);
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.social-link:hover {
+    color: var(--primary); /* Berubah jadi emas saat hover */
+    transform: translateY(-2px);
+}
+
+/* Responsivitas: Di HP, jangan sampai terlalu rapat */
+@media (max-width: 768px) {
+    .nav-right {
+        gap: 15px;
+    }
+}
+/* Styling Navbar Right */
+.nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-link {
+    color: var(--text);
+    text-decoration: none;
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.social-link:hover {
+    color: var(--primary); /* Menggunakan warna merah sesuai variabel Anda */
+    transform: scale(1.1);
+}
+
+/* Penyesuaian Mobile */
+@media (max-width: 768px) {
+    .nav-right {
+        margin-left: auto;
+        padding-right: 15px;
+    }
+}
+/* Gaya Link Instagram di Kontak */
+.instagram-text-link {
+    color: var(--primary); /* Menggunakan warna merah utama Anda */
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.instagram-text-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Footer Styling */
+.footer {
+    padding: 40px 0;
+    background: var(--surface);
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.footer p {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 0.9rem;
+}
+
+.footer-socials a {
+    color: var(--text);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-socials a:hover {
+    color: var(--primary);
+}
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+    .contact-details {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+/* =========================================
+   PENGUATAN ANIMASI & TRANSISI PROFESIONAL
+   ========================================= */
+
+/* 1. Global Transition - Membuat semua perubahan state (hover) menjadi halus */
+a, button, .gallery-item, .stat-item, .contact-box {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Efek ease-out yang elegan */
+    will-change: transform, opacity; /* Optimasi performa */
+}
+
+/* 2. Peningkatan Hover Tombol Utama (Hero) */
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4); /* Merah sesuai theme */
+    background-color: #e60000; /* Sedikit lebih gelap */
+}
+
+/* 3. Peningkatan Hover Tombol WhatsApp */
+.wa-float:hover, .btn-whatsapp-large:hover {
+    transform: translateY(-5px) scale(1.05) rotate(3deg); /* Sedikit rotasi agar dinamis */
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.3);
+}
+
+/* 4. Peningkatan Hover Kartu Portfolio */
+.gallery-item:hover {
+    transform: translateY(-15px) scale(1.02); /* Lebih tinggi sedikit */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+.gallery-item img {
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1); /* Efek zoom di dalam kartu */
+}
+
+/* 5. Hover Ikon Media Sosial di Navbar & Footer */
+.social-link:hover, .footer-socials a:hover {
+    color: var(--primary);
+    transform: translateY(-3px) scale(1.1);
+}
+
+/* 6. Animasi Pulse Samar untuk Tombol WA Float (Menarik Perhatian) */
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.wa-float {
+    animation: pulse-green 2s infinite;
+}
+
+/* 7. Perbaikan Animasi Melayang Logo Background Hero (Agar lebih halus) */
+@keyframes floating-smooth {
+    0% { transform: translate(0, 0px); }
+    50% { transform: translate(0, 20px); }
+    100% { transform: translate(0, -0px); }
+}
+
+.hero-bg-logo {
+    /* Mengganti animasi lama dengan yang baru */
+    animation: floating-smooth 8s ease-in-out infinite !important; 
+}
+:root {
+  --primary: #ff0000;
+  --bg: #ffffff;
+  --text: #2d2d2d;
+  --surface: #fdfbf8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+h1, .logo { font-family: 'Playfair Display', serif; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* Navbar & Hamburger */
+.navbar { background: white; padding: 15px 0; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; z-index: 1000; }
+.nav-inner { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.2rem; text-decoration: none; color: #1a1a1a; font-weight: bold; }
+.logo span { color: var(--primary); }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; z-index: 1001; }
+.hamburger span { display: block; width: 25px; height: 3px; background-color: var(--text); transition: 0.3s; }
+
+.nav-menu a { text-decoration: none; color: #333; margin-left: 20px; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
+.nav-menu a:hover { color: var(--primary); }
+
+/* Hero */
+.hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%); }
+.hero-bg-logo { position: absolute; width: 60%; height: 60%; background-image: url('images/logo.jpeg'); background-repeat: no-repeat; background-position: center; background-size: contain; opacity: 0.15; z-index: 1; animation: floating 6s ease-in-out infinite; }
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(20px); }
+}
+
+.hero-content { position: relative; z-index: 2; text-align: center; }
+.hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); line-height: 1.1; margin-bottom: 1.5rem; }
+.btn-primary { background: var(--primary); color: white; padding: 14px 35px; border-radius: 50px; text-decoration: none; display: inline-block; font-weight: bold; transition: 0.4s; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4); }
+
+/* Portfolio */
+.section { padding: 80px 0; }
+.section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+.gallery-item { border-radius: 15px; overflow: hidden; background: white; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: 0.4s; }
+.gallery-item:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+.gallery-item img { width: 100%; height: 300px; object-fit: cover; transition: 0.6s; }
+.gallery-item:hover img { transform: scale(1.1); }
+
+/* WA Float Animation */
+.wa-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; animation: pulse 2s infinite; }
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* Mobile Nav */
+@media (max-width: 768px) {
+    .nav-menu { position: fixed; top: 0; right: -100%; background: white; width: 70%; height: 100vh; flex-direction: column; padding-top: 80px; transition: 0.4s; box-shadow: -5px 0 15px rgba(0,0,0,0.1); }
+    .nav-menu.active { right: 0; }
+    .nav-menu a { margin: 15px 30px; font-size: 1.1rem; }
+    .about-grid { grid-template-columns: 1fr; text-align: center; }
+}
+/* Styling untuk Link Portfolio */
+.gallery-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Detail Page Layout */
+.project-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.project-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.project-detail-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.project-main-img img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.project-info h3 {
+    margin: 20px 0 10px;
+    color: var(--primary);
+    border-left: 4px solid var(--primary);
+    padding-left: 15px;
+}
+
+.project-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.project-info ul li {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #eee;
+}
+
+/* Responsif untuk Detail */
+@media (max-width: 768px) {
+    .project-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Efek Hover Khusus TikTok */
+.nav-right a[aria-label="TikTok"]:hover {
+    color: #ff0050; /* Warna khas TikTok */
+    filter: drop-shadow(2px 0px 0px #00f2ea); /* Efek bayangan khas TikTok */
+}
+
+.tiktok-text-link:hover {
+    color: var(--primary) !important;
+    text-decoration: underline !important;
+}
